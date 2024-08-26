@@ -52,8 +52,8 @@ public class DeckOfCards {
 
     }
     
-    public Card drawCard(int drawnCard) {
-        drawnCard++;
+    public Card drawCard() {
+        this.drawnCards++;
         return this.deck[this.drawnCards-1];
     }
 }
