@@ -75,4 +75,8 @@ public class DeckOfCards {
         drawnCard++;
         return this.deck[this.drawnCards-1];
     }
+
+    public Card[] getDeck() {
+        return this.deck;
+    }
 }
