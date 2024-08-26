@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Random;
 
 public class DeckOfCards {
     
@@ -24,5 +25,26 @@ public class DeckOfCards {
         }
     }
 
+    public void shuffleDeck(int recursion) {
+        
+        Random random = new Random();
+        int splitNum = random.nextInt(1,52);
+        Card[] splitDeck = new Card[52];
+
+        for(int i = 0; i < 52; i++) {
+            if(i < splitNum) {
+                splitDeck[52-splitNum] = deck[i];
+            } else {
+                splitDeck[i-splitNum] = deck[i];
+            }
+        }
+
+        recursion--;
+        this.deck = splitDeck;
+        if(recursion > 0) {
+            shuffleDeck(recursion);
+        }
+
+    }
     
 }
