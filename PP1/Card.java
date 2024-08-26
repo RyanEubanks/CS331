@@ -1,16 +1,18 @@
 public class Card {
-    private String value;
+    private String face;
     private String suit;
+    private int value;
     
     // Card constructor
-    public Card(String value, String suit) {
-        this.value = value;
+    public Card(String face, String suit, int value) {
+        this.face = face;
         this.suit = suit;
+        this.value = value;
     }
-
+   
     // Getters and Setters
-    public String getValue() {
-        return value;
+    public String getFace() {
+        return face;
     }
 
     public String getSuit() {
@@ -21,7 +23,11 @@ public class Card {
         this.suit = suit;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setFace(String face) {
+        this.face = face;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
