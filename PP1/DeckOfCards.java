@@ -5,6 +5,7 @@ public class DeckOfCards {
     
     private Card deck[];
     private int deckNumber;
+    private int drawnCards;
 
     // getting rid of these soon because I'm sigma
     private String[] values = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
@@ -12,8 +13,10 @@ public class DeckOfCards {
 
     
     // deck constructor needs to invoke the populateDeck function to create the cards.
-    public DeckOfCards() {
-       
+    public DeckOfCards(int deckNumber) {
+       this.deckNumber = deckNumber;
+       this.drawnCards = 0;
+       populateDeck();
     }
 
     public void populateDeck() {
@@ -25,7 +28,7 @@ public class DeckOfCards {
         }
     }
 
-public void shuffleDeck(int shuffles) {
+    public void shuffleDeck(int shuffles) {
         
         Random random = new Random();
         int splitNum = random.nextInt(1,52);
@@ -43,8 +46,14 @@ public void shuffleDeck(int shuffles) {
         this.deck = splitDeck;
         if(shuffles > 0) {
             shuffleDeck(shuffles);
+        } else {
+            this.drawnCards = 0;
         }
 
     }
-
+    
+    public Card drawCard(int drawnCard) {
+        drawnCard++;
+        return this.deck[this.drawnCards-1];
+    }
 }
