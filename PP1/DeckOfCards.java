@@ -53,7 +53,7 @@ public class DeckOfCards {
         // temp array
         Card splitDeck[] = new Card[52];
 
-        System.out.println("[" + splitNum + "]");
+        //System.out.println("[" + splitNum + "]");
 
         for(int i = 0; i < 52; i++) {
             if(i < splitNum) {
@@ -62,6 +62,10 @@ public class DeckOfCards {
             } else {
                 //System.out.println("This works");
                 splitDeck[i-splitNum] = deck[i];
+                if(i<52) {
+                    i++;
+                    splitDeck[52-splitNum-i] = deck[i];
+                }
                 //System.out.println(splitDeck[i-splitNum].getValue());
             }
 
@@ -101,6 +105,7 @@ public class DeckOfCards {
             Card temp = deck[i];
             deck[i] = deck[j];
             deck[j] = temp;
+            shuffleDeck(100);
         }
 
         this.drawnCards = 0;

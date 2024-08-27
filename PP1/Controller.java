@@ -7,7 +7,7 @@ public class Controller {
 
         System.out.println("===========================================");
         
-        deck1.shuffleDeck();
+        deck1.shuffleDeck(500);
         for(Card cards : deck1.getDeck()) {
             System.out.println(cards.getSuit() + " " + cards.getFace() + ": " + cards.getValue());
         }
