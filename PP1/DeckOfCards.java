@@ -11,8 +11,8 @@ public class DeckOfCards {
     private int drawnCards;
 
     // getting rid of these soon because I'm sigma
-    private String[] values = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
-    private HashMap<String, Integer> faceCards = new HashMap<>();
+    //private String[] values = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    //private HashMap<String, Integer> faceCards = new HashMap<>();
 
 
     
@@ -30,7 +30,7 @@ public class DeckOfCards {
         
         
 
-            for(Enum suit : Suits.values()) {
+            for(Enum<Suits> suit : Suits.values()) {
                 for(Values value : Values.values()) {
                     if(value.getDisplay().equals("A")) {
                         deck[counter] = new Card(value.getDisplay(), suit.toString(), value.getCardValue2());
@@ -69,6 +69,21 @@ public class DeckOfCards {
             this.drawnCards = 0;
         }
 
+    }
+
+    // Fisher-Yates Algorithm (apparently it's good)
+    public void shuffleDeck() {
+        Random random = new Random();
+        
+        for (int i = deck.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            
+            Card temp = deck[i];
+            deck[i] = deck[j];
+            deck[j] = temp;
+        }
+
+        this.drawnCards = 0;
     }
     
     public Card drawCard(int drawnCard) {
