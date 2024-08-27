@@ -49,7 +49,7 @@ public class DeckOfCards {
     public void shuffleDeck(int shuffles) {
         
         Random random = new Random();
-        int splitNum = random.nextInt(1,26);
+        int splitNum = random.nextInt(1,52);
         // temp array
         Card splitDeck[] = new Card[52];
 
@@ -62,10 +62,6 @@ public class DeckOfCards {
             } else {
                 //System.out.println("This works");
                 splitDeck[i-splitNum] = deck[i];
-                if(i<52) {
-                    i++;
-                    splitDeck[52-splitNum-i] = deck[i];
-                }
                 //System.out.println(splitDeck[i-splitNum].getValue());
             }
 
@@ -105,7 +101,6 @@ public class DeckOfCards {
             Card temp = deck[i];
             deck[i] = deck[j];
             deck[j] = temp;
-            shuffleDeck(100);
         }
 
         this.drawnCards = 0;
