@@ -43,7 +43,6 @@ public class DeckOfCards {
                 }
             }
             
-        
     }
 
     public void shuffleDeck(int shuffles) {
@@ -109,6 +108,10 @@ public class DeckOfCards {
     public Card drawCard(int drawnCard) {
         drawnCard++;
         return this.deck[this.drawnCards-1];
+    }
+
+    public int getNumberOfCards() {
+        return deck.length - drawnCards;
     }
 
     public Card[] getDeck() {
