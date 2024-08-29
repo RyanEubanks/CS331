@@ -1,47 +1,17 @@
+package Constants;
 import javax.swing.*;
-
-import Constants.*;
-
 import java.awt.*;
 
-public class Controller extends JFrame{
+public class Table extends JFrame{
 
-    //private Table table;
-
-    public static void main(String[] args) {
-        DeckOfCards deck1 = new DeckOfCards(1);
-
-        Table table = new Table();
-        table.drawBlackjackTable();
-        /*
-        for(Card card : deck1.getDeck()) {
-            System.out.println(card.getSuit() + " " + card.getFace() + ": " + card.getValue());
-        }
-
-        System.out.println("===========================================");
-        
-        deck1.shuffleDeck(500);
-        for(Card cards : deck1.getDeck()) {
-            System.out.println(cards.getSuit() + " " + cards.getFace() + ": " + cards.getValue());
-        }
-        */
-
-        
-
-        
-
-    }
-
-    public void StartGame() {
-        
-    }
-
-    public void drawTable() {
+    public Table() {
         setTitle("Blackjack Table");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+    }
 
+    public void drawBlackjackTable() {
         // Dealer's area
         JPanel dealerPanel = new JPanel();
         dealerPanel.setBorder(BorderFactory.createTitledBorder("Dealer's Hand"));
@@ -79,8 +49,9 @@ public class Controller extends JFrame{
         add(playerPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Set frame to be visible
+        // Make the frame visible
         setVisible(true);
-    
     }
+
+
 }
