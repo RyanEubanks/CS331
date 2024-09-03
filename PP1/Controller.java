@@ -9,29 +9,38 @@ public class Controller extends JFrame{
     //private Table table;
 
     public static void main(String[] args) {
-        StartGame();
-        /*
-        for(Card card : deck1.getDeck()) {
-            System.out.println(card.getSuit() + " " + card.getFace() + ": " + card.getValue());
-        }
-
-        System.out.println("===========================================");
-        
-        deck1.shuffleDeck(500);
-        for(Card cards : deck1.getDeck()) {
-            System.out.println(cards.getSuit() + " " + cards.getFace() + ": " + cards.getValue());
-        }
-        */
-
+        //StartGame();
+        test();
 
     }
-
+/* 
     public static void StartGame() {
         DeckOfCards deck1 = new DeckOfCards(1);
-        Table table = new Table();
-        table.drawTable();
-
+        deck1.populateDeck();
+        Card[] hand = new Card[10];
         
+        Player player1 = new Player(hand, 0, 0, "Ryan");
+        Table table = new Table();
+
+        table.add(new CirclePanel());
+
+        table.drawTable();
+        table.pack();
+        table.setVisible(true);
+    
+    }
+*/
+
+    public static void test() {
+        JFrame frame = new JFrame();
+        frame.setSize(1200, 700);
+
+        //frame.add(new CirclePanel());
+        frame.add(new Table());
+        
+        
+
+        frame.setVisible(true);
     }
 
 }
