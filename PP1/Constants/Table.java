@@ -11,14 +11,14 @@ public class Table extends JFrame{
         setLayout(new BorderLayout());
     }
 
-    public void drawBlackjackTable() {
+    public void drawTable() {
         // Dealer's area
         JPanel dealerPanel = new JPanel();
         dealerPanel.setBorder(BorderFactory.createTitledBorder("Dealer's Hand"));
         dealerPanel.setPreferredSize(new Dimension(600, 100));
-        dealerPanel.setBackground(new Color(34, 139, 34));  // Green background
+        // (34,139,34) is green
+        dealerPanel.setBackground(new Color(34, 139, 34));
 
-        // Placeholder for dealer's cards
         JLabel dealerCards = new JLabel("Dealer's Cards will appear here", SwingConstants.CENTER);
         dealerPanel.add(dealerCards);
 
@@ -28,7 +28,6 @@ public class Table extends JFrame{
         playerPanel.setPreferredSize(new Dimension(600, 100));
         playerPanel.setBackground(new Color(34, 139, 34));  // Green background
 
-        // Placeholder for player's cards
         JLabel playerCards = new JLabel("Player's Cards will appear here", SwingConstants.CENTER);
         playerPanel.add(playerCards);
 
@@ -44,14 +43,12 @@ public class Table extends JFrame{
         buttonPanel.add(standButton);
         buttonPanel.add(doubleButton);
 
-        // Add components to the main frame
+        // Add components
         add(dealerPanel, BorderLayout.NORTH);
         add(playerPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Make the frame visible
         setVisible(true);
     }
-
 
 }
