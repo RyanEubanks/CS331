@@ -32,15 +32,9 @@ public class Controller extends JFrame{
 */
 
     public static void test() {
-        JFrame frame = new JFrame();
-        frame.setSize(1200, 700);
+        Table table = new Table();
 
-        //frame.add(new CirclePanel());
-        frame.add(new Table());
-        
-        
-
-        frame.setVisible(true);
+        table.drawTable();
     }
 
 }
