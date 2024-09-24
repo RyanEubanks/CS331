@@ -2,6 +2,11 @@ package ProjectStacks;
 import java.util.Stack;
 import java.util.Random;
 
+/*
+ * Implement the optimistic alg for solving maze
+ * 
+ * 
+ */
 
 public class Maze {
 
