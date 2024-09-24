@@ -1,27 +1,44 @@
-import Constants.Values;
+import java.awt.Graphics;
 
-public class Player {
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Constants.*;
+
+public class Player extends JFrame{
+    private String name;
     private Card[] hand;
     private int chipTotal;
     private int handTotal;
 
 
-    public Player(Card[] hand, int chipTotal, int handTotal) {
+    public Player(Card[] hand, int chipTotal, int handTotal, String name) {
         this.hand = hand;
         this.chipTotal = chipTotal;
         this.handTotal = handTotal;
+        this.name = name;
     }
 
     public void drawCard(DeckOfCards deck) {
         drawCard(deck);
     }
 
+    public void drawPlayerIcon(String name) {
+        CirclePanel c = new CirclePanel();
+        JLabel playerName = new JLabel();
+
+        playerName.setText(name);
+        c.add(playerName);
+        setVisible(true);
+        
+    }
+
     // getters and setters
-    /* 
     public String getName() {
         return this.name;
     }
-    */
+    
 
     public Card[] getHand() {
         return hand;
@@ -59,5 +76,7 @@ public class Player {
     public void setHandTotal(int handTotal) {
         this.handTotal = handTotal;
     }
+
+
 
 }

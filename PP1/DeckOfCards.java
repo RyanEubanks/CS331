@@ -28,8 +28,6 @@ public class DeckOfCards {
         
         int counter = 0;
         
-        
-
             for(Enum<Suits> suit : Suits.values()) {
                 for(Values value : Values.values()) {
                     if(value.getDisplay().equals("A")) {
@@ -42,7 +40,7 @@ public class DeckOfCards {
                     if(counter == 52) { return; }
                 }
             }
-            
+    
     }
 
     public void shuffleDeck(int shuffles) {
