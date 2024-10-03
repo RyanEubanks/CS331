@@ -41,4 +41,11 @@ public class Maze {
         }
 
     }
+
+    public void FloodFill() {
+        // if options < positionVal
+            // if inStack - pop
+            // else - push
+        // else - increaseVals
+    }
 }
