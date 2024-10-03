@@ -42,8 +42,31 @@ public class Maze {
 
     }
 
-    public void FloodFill() {
-        // if options < positionVal
+    public void updateMaze() {
+        // arrSize - [5][5]
+        // exit - [3][4] = 0
+        // ent - [1][0]
+
+        /*
+            {
+            7,e,5,4,5
+            6,5,4,3,4
+            5,4,3,2,3
+            4,3,2,1,2
+            3,2,1,x,1
+            }
+        */
+
+        //! absoluteDifference : [3][4] - [2][4] = 1 | [3][4] - [1][0] = 6 | [3][4] - [4][0] = 5
+
+        // [2][4] = 1
+        // [1][4] = 2
+        // [0][4] = 3
+        // [1][3] = 3
+    }
+
+    public void floodFill() {
+        // if options < posVal
             // if inStack - pop
             // else - push
         // else - increaseVals
