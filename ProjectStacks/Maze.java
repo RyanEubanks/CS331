@@ -14,30 +14,75 @@ public class Maze {
         
     }
 
-    public void createMaze(int width, int height) {
-        String[][] maze = new String[width][height];
-
-        // left side is 0, top is 1, right is 2, bottom is 3
+    private static Cell getRandomEdge(int rows, int cols) {
         Random random = new Random();
-        int n = random.nextInt(4);
+        int edge = random.nextInt(4); 
+        int x = 0, y = 0;
+        // 0 = top, 1 = bottom, 2 = left, 3 = right
+        
+        switch (edge) {
+            case 0: // Top edge
+                x = 0;
+                y = random.nextInt(cols);
+                break;
+            case 1: // Bottom edge
+                x = rows - 1;
+                y = random.nextInt(cols);
+                break;
+            case 2: // Left edge
+                x = random.nextInt(rows);
+                y = 0;
+                break;
+            case 3: // Right edge
+                x = random.nextInt(rows);
+                y = cols - 1;
+                break;
+        }
 
-        switch(n) {
-            case 0 -> {
-                int ny = random.nextInt(height);
-                maze[0][ny] = "o";
+        return new Cell(x, y);
+    }
+
+    /*
+     * might consider creating varibles for these numbers so it is easier to read the code
+     * Entrance: 0
+     * Path:0
+     * Wall: 1
+     * Exit: 2
+     */
+    public int[][] generateMaze(int rows, int cols) {
+        // important variables
+        int [][] maze = new int[rows][cols];
+        Cell entrance = getRandomEdge(rows, cols);
+        Cell exit = getRandomEdge(rows, cols);
+        Stack<Cell> depth = new Stack<>();
+
+        // fill the maze with walls
+        for(int i = 0; i < rows; i++) {
+            for(int k = 0; k < cols; k++) {
+                maze[i][k] = 1;
             }
-            case 1 -> {
-                int nx = random.nextInt(width);
-                maze[0][nx] = "o";
-            }
-            case 2 -> {
-                int ny = random.nextInt(height);
-                maze[0][ny] = "o";
-            }
-            case 3 -> {
-                int nx = random.nextInt(width);
-                maze[0][nx] = "o";
-            }
+        }
+
+        // making sure that the entrance does not spawn ontop of the exit
+        while(entrance.x == exit.x && entrance.y == exit.y) {
+            exit = getRandomEdge(rows, cols);
+        }
+
+        // setting the enterance and exit
+        maze[entrance.x][entrance.y] = 0;
+        maze[exit.x][exit.y] = 2;
+
+        // making the path for backtracking (with stack)
+        depth.push(entrance);
+        maze[entrance.x][entrance.y] = 0;
+
+        while(!depth.isEmpty()) {
+            Cell current = depth.pop();
+            int x = current.x;
+            int y = current.y;
+
+            // get the nonvisited cells
+            
         }
 
     }
