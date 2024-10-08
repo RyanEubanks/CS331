@@ -61,6 +61,6 @@ public class Main {
             { 0, 0, 5, 2, 0, 6, 3, 0, 0 } 
             };
 
-            System.out.println(isValid(board, 3));
+            //System.out.println(isValid(board, 3));
     }
 }
