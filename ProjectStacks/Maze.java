@@ -111,9 +111,47 @@ public class Maze {
     }
 
     public void floodFill() {
+
+        Stack<int[]> mazeRoute = new Stack<>();     // each element consists of 2 values, row coord and column coord
+        int[] element = new int[2];
+        int floodVal = maze[mazeRoute.peek()[0]][mazeRoute.peek()[1]];      // floodVal of current tile
+
         // if options < posVal
+        element = checkOptions(mazeRoute.peek(), maze, floodVal);
+        if(element != null) {
             // if inStack - pop
+            if(element == mazeRoute.peek()) {
+                mazeRoute.pop();
             // else - push
+            } else {
+                mazeRoute.push();
+            }
         // else - increaseVals
+        } else {
+            // This works by 
+        }
+    }
+
+    public int[] checkOptions(int[] options, int[][] maze, int floodVal) {
+
+        xCoord = options[0];
+        yCoord = options[1];
+
+        // Checking if values bordering our current location are less than our current floodFill value
+        if(floodVal > maze[xCoord+1][yCoord]) {
+            int[] newCoord = {xCoord+1, yCoord, maze[xCoord+1][yCoord]};
+            return newCoord;
+        } else if(floodVal > maze[xCoord][yCoord+1]) {
+            int[] newCoord = {xCoord, yCoord+1, maze[xCoord][yCoord+1]};
+            return newCoord;
+        } else if(floodVal > maze[xCoord-1][yCoord]) {
+            int[] newCoord = {xCoord-1, yCoord, maze[xCoord-1][yCoord]};
+            return newCoord;
+        } else if(floodVal > maze[xCoord][yCoord-1]) {
+            int[] newCoord = {xCoord, yCoord-1, maze[xCoord][yCoord-1]};
+            return newCoord;
+        } else {
+            return null;
+        }
     }
 }
