@@ -1,5 +1,6 @@
 package ProjectStacks;
 import java.util.Stack;
+
 import java.util.Random;
 
 /*
@@ -10,43 +11,41 @@ import java.util.Random;
 public class Maze {
 
     public static void main(String[] args) {
+        int[] cell = {0, 0};
+        System.out.println("x: " + cell[0]);
+        System.out.println("y: " + cell[1]);
         int rows = 11;
         int cols = 11;
 
-        int [][] maze = generateMaze(rows, cols);
-        printMaze(maze);
+        //int[][] maze = generateMaze(rows, cols);
+        //printMaze(maze);
+        //floodFill(maze);
     }
 
-    private static Cell getRandomEdge(int rows, int cols) {
+    public static int[] getRandomEdge(int rows, int cols) {
         Random random = new Random();
-        int edge = random.nextInt(4); 
+        int edge = random.nextInt(4);
         int x = 0, y = 0;
-        // 0 = top, 1 = bottom, 2 = left, 3 = right
         
         switch (edge) {
-            // Top edge
-            case 0:
+            case 0 -> { // Top edge
                 x = 0;
                 y = random.nextInt(cols);
-                break;
-            // Bottom edge
-            case 1:
+            }
+            case 1 -> { // Bottom edge
                 x = rows - 1;
                 y = random.nextInt(cols);
-                break;
-            // Left edge
-            case 2:
+            }
+            case 2 -> { // Left edge
                 x = random.nextInt(rows);
                 y = 0;
-                break;
-            // Right edge
-            case 3:
+            }
+            case 3 -> { // Right edge
                 x = random.nextInt(rows);
                 y = cols - 1;
-                break;
+            }
         }
-
-        return new Cell(x, y);
+        return new int[]{x, y};
     }
 
     /*
@@ -56,108 +55,91 @@ public class Maze {
      * Wall: 1
      * Exit: 2
      */
-    public static int[][] generateMaze(int rows, int cols) {
-        // important variables
-        int [][] maze = new int[rows][cols];
-        Cell entrance = getRandomEdge(rows, cols);
-        Cell exit = getRandomEdge(rows, cols);
-        Stack<Cell> depth = new Stack<>();
 
-        // fill the maze with walls
-        for(int i = 0; i < rows; i++) {
-            for(int k = 0; k < cols; k++) {
-                maze[i][k] = 1;
+     private static class Coordinates {
+        int row;
+        int col;
+        Coordinates(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+     }
+
+     public static int[][] SolveMaze(Maze maze) {
+        Stack<Coordinates> stack = new Stack<>();
+
+     }
+
+     /* 
+    public static int[][] generateMaze(int rows, int cols) {
+        int[][] maze = new int[rows][cols];
+        int[] entrance = getRandomEdge(rows, cols);
+        int[] exit = getRandomEdge(rows, cols);
+        Stack<int[]> depth = new Stack<>();
+    
+        // Fill the maze with walls
+        for (int i = 0; i < rows; i++) {
+            for (int k = 0; k < cols; k++) {
+                maze[i][k] = 1; // Fill with walls
             }
         }
-
-        // making sure that the entrance does not spawn ontop of the exit
-        while(entrance.x == exit.x && entrance.y == exit.y) {
+    
+        // Ensure entrance and exit are not at the same location
+        while (entrance[0] == exit[0] && entrance[1] == exit[1]) {
             exit = getRandomEdge(rows, cols);
         }
-
-        // setting the enterance and exit
-        maze[entrance.x][entrance.y] = 0;
-        maze[exit.x][exit.y] = 2;
-
-        // making the path for backtracking (with stack)
+    
+        // Set entrance as 3 and exit as 2
+        maze[entrance[0]][entrance[1]] = 3; // Entrance is now marked as 3
+        maze[exit[0]][exit[1]] = 2; // Exit is still 2
+    
+        // Initialize stack with the entrance
         depth.push(entrance);
-        maze[entrance.x][entrance.y] = 0;
-
-        while(!depth.isEmpty()) {
-            Cell current = depth.pop();
-            int x = current.x;
-            int y = current.y;
-
-            // get to a nonvisited cells by randomly picking a direction when you backtrack
-            int[] directions = {0, 1, 2, 3};
+    
+        while (!depth.isEmpty()) {
+            int[] current = depth.pop();
+            int x = current[0];
+            int y = current[1];
+    
+            // Get random directions
+            int[] directions = {0, 1, 2, 3}; // Up, Down, Left, Right
             shuffle(directions);
-
-            // this loop carves through the walls making the paths and updating coords
-            for(int direction: directions) {
-                
-                /*
-                 * This loop is low-key kinda diabolical but idrc
-                 * 0 -> up
-                 * 1 -> down
-                 * 2 -> left
-                 * 3 -> right
-                 * 
-                 * the new switch statment syntax is cool, it gets rid of the ugly break statment
-                 * while also limiting the scope of a var to a single block instead of the whole switch statement
-                 */
-                switch(direction) {
-                    case 0 -> {
-                        int nX = x;
-                        int nY = y - 2; // subtracting 2 to go up hurt brain
-                        if(isVaildMove(nX, nY, rows, cols)) {
-                            // braking through walls if we in bounds
-                            maze[x][y - 1] = 0; //! A path is = 0, I could probably turn it into a variable later
-                            maze[nX][nY] = 0;
-                            depth.push(new Cell(nX, nY));
-                        }
-                    }
-                    case 1 -> {
-                        int nX = x;
-                        int nY = y + 2;
-                        if(isVaildMove(nX, nY, rows, cols)) {
-                            maze[x][y + 1] = 0;
-                            maze[nX][nY] = 0;
-                            depth.push(new Cell(nX, nY));
-                        }
-                    }
-                    case 2 -> {
-                        int nX = x - 2;
-                        int nY = y;
-                        if(isVaildMove(nX, nY, rows, cols)) {
-                            maze[x - 1][y] = 0;
-                            maze[nX][nY] = 0;
-                            depth.push(new Cell(nX, nY));
-                        }
-                    }
-                    case 3 -> {
-                        int nX = x + 2;
-                        int nY = y;
-                        if(isVaildMove(nX, nY, rows, cols)) {
-                            maze[x + 1][y] = 0;
-                            maze[nX][nY] = 0;
-                            depth.push(new Cell(nX, nY));
-                        }
-                    }
+    
+            boolean moved = false; // Track whether a move was made
+    
+            for (int direction : directions) {
+                int nX = x, nY = y;
+    
+                switch (direction) {
+                    case 0 -> nY -= 2; // Up
+                    case 1 -> nY += 2; // Down
+                    case 2 -> nX -= 2; // Left
+                    case 3 -> nX += 2; // Right
                 }
-            
+    
+                // Check if we can move to the next cell
+                if (isValidMove(nX, nY, rows, cols) && maze[nX][nY] == 1) {
+                    // Create a path
+                    maze[(x + nX) / 2][(y + nY) / 2] = 0; // Remove wall between current and next cell
+                    maze[nX][nY] = 0; // Carve out the next cell
+                    depth.push(new int[]{nX, nY});
+                    moved = true;
+                }
+            }
+    
+            // If no valid move was made, backtrack
+            if (!moved) {
+                System.out.println("Backtracking from: " + x + ", " + y);
             }
         }
         return maze;
-
     }
 
-    // fisher-yates shuffle which was quite literaly stolen from our card game project lol
+    */
     public static int[] shuffle(int[] arr) {
         Random random = new Random();
-        
         for (int i = arr.length - 1; i > 0; i--) {
             int j = random.nextInt(i + 1);
-            
             int temp = arr[i];
             arr[i] = arr[j];
             arr[j] = temp;
@@ -165,21 +147,19 @@ public class Maze {
         return arr;
     }
 
-    // checks to see if the position is a wall
-    public static boolean isVaildMove(int x, int y, int rows, int cols) {
-        if(x < 0 || y < 0 || x >= rows || y >= cols) {
-            return false;
-        }
-        return true;
+    public static boolean isValidMove(int x, int y, int rows, int cols) {
+        return x >= 0 && y >= 0 && x < rows && y < cols;
     }
 
     public static void printMaze(int[][] maze) {
+        maze[0][0] = 4;
         for (int[] row : maze) {
             for (int cell : row) {
                 System.out.print(cell + " ");
             }
             System.out.println();
         }
+        
     }
 
     public void updateMaze() {
@@ -205,7 +185,8 @@ public class Maze {
         // [1][3] = 3
     }
 
-    public void floodFill(int[][] maze) {
+    
+    public static void floodFill(int[][] maze) {
         
         Stack<int[]> mazeRoute = new Stack<>();     // each element consists of 2 values, row coord and column coord
         int[] element = new int[2];
@@ -227,7 +208,7 @@ public class Maze {
         }
     }
 
-    public int[] checkOptions(int[] options, int[][] maze, int floodVal) {
+    public static int[] checkOptions(int[] options, int[][] maze, int floodVal) {
 
         int xCoord = options[0];
         int yCoord = options[1];
@@ -249,5 +230,7 @@ public class Maze {
             return null;
         }
     }
+        
+
         
 }
