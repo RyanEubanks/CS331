@@ -4,12 +4,12 @@ public class Creature {
     
     private int row;
     private int col;
-    private boolean visited;
+    //private boolean visited;
     
     public Creature(int row, int col) {
         this.row = row;
         this.col = col;
-        this.visited = false;
+        //this.visited = false;
     }
     
     public void moveUp() {
@@ -48,6 +48,7 @@ public class Creature {
         this.col = col;
     }
 
+    /* 
     public boolean isVisited() {
         return visited;
     }
@@ -55,11 +56,6 @@ public class Creature {
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
-
-    // testing purposes will probably delete later
-    @Override
-    public String toString() {
-        return "Creature{" + "row=" + row + ", col=" + col + ", visited=" + visited + '}';
-    }
+    */
 
 }

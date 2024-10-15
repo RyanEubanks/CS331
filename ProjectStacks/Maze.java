@@ -10,6 +10,10 @@ import java.util.Random;
 
 public class Maze {
 
+    public Maze(int[][] maze2, int entranceRow, int entranceCol, int exitRow, int exitCol) {
+        //TODO Auto-generated constructor stub
+    }
+
     public static void main(String[] args) {
         int[] cell = {0, 0};
         System.out.println("x: " + cell[0]);
